@@ -59,11 +59,12 @@ document.addEventListener("DOMContentLoaded", function () {
                 // 다음 항목을 500ms 후에 깜빡이게 함
                 setTimeout(() => blinkNextItem(index), 500);
             } else {
-                // 모든 항목이 깜빡였으면 2초 대기 후 다시 시작
-                setTimeout(() => blinkNextItem(0), 2000);
+                // 모든 항목이 깜빡였으면 2초 대기 후 리더보드를 다시 로드
+                setTimeout(() => {
+                    fetchTeams(); // 리더보드 업데이트
+                }, 2000);
             }
         }
-
         // 첫 번째 항목부터 깜빡이기 시작
         blinkNextItem(0);
     }

@@ -1,0 +1,404 @@
+/* CSS - Shea Parker */
+
+/********* BASE **********/
+*, *:before, *:after {
+    box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+}
+
+/* 기존 스타일 유지 */
+
+body, html {
+    min-height: 100%;
+}
+
+body {
+    background: #444;
+}
+
+.leaderboard {
+    position: relative;
+    width: 70%;
+    height: 70%;
+    max-width: 960px;
+    min-width: 400px;
+    min-height: 600px;
+    margin: 30px auto 0 auto;
+    padding: 3%;
+}
+
+.leaderboard h1 {
+    text-align: center;
+    text-transform: uppercase;
+    margin: 30px;
+    padding: 0;
+    color: #cc7713;
+}
+
+.content {
+    position: relative;
+    width: 70%;
+    margin: 3px auto 0 auto;
+    min-width: 300px;
+}
+
+/* .content ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    border: 5px solid #CCC;
+    background: rgba(40,40,40,0.75);
+} */
+
+.content ul li {
+    position: relative;
+    color: #FFF;
+    font-family: helvetica;
+    padding: 2% 5%;
+    border-bottom: 1px solid #555;
+}
+
+.content ul li:last-child {
+    border-bottom: none;
+}
+
+.name {
+    font-weight: bold;
+}
+
+.count {
+    display: inline-block;
+    float: right;
+    color: rgb(43, 184, 0);
+    font-weight: bold;
+}
+
+.count:after {
+    content: '개';
+    color: #CCC;
+    font-size: 80%;
+    font-weight: normal;
+}
+
+/********* BLING **********/
+.content ul {
+    border-radius: 20px;
+}
+
+.animate {
+    -moz-animation: flashIt 0.2s ease 1;
+    -webkit-animation: flashIt 0.2s ease 1;
+    animation: flashIt 0.2s ease 1;
+}
+
+.animate .countold {
+    -moz-animation: spinIt 0.3s ease 1;
+    -webkit-animation: spinIt 0.3s ease 1;
+    animation: spinIt 0.3s ease 1;
+}
+
+@-moz-keyframes flashIt {
+    100% { opacity: 0; background-color: #FFF;}
+}
+@-webkit-keyframes flashIt {
+    100% { opacity: 0; background-color: #FFF;}
+}
+@keyframes flashIt {
+    100% { opacity: 0; }
+}
+
+@-moz-keyframes spinIt {
+    20% {-moz-transform: rotate(-10deg)}
+    40% {-moz-transform: rotate(10deg)}
+    60% {-moz-transform: rotate(-10deg)}
+    80% {-moz-transform: rotate(10deg)}
+    100% {-moz-transform: rotate(-10deg)}
+}
+@-webkit-keyframes spinIt {
+    20% {-webkit-transform: rotate(-10deg)}
+    40% {-webkit-transform: rotate(10deg)}
+    60% {-webkit-transform: rotate(-10deg)}
+    80% {-webkit-transform: rotate(10deg)}
+    100% {-webkit-transform: rotate(-10deg)}
+}
+@keyframes spinIt {
+     20% {transform: rotate(-10deg)}
+     40% {transform: rotate(10deg)}
+     60% {transform: rotate(-10deg)}
+     80% {transform: rotate(10deg)}
+     100% {transform: rotate(-10deg)}
+}
+
+/* 1등 - 금색 */
+.gold {
+    background-color: gold;
+    color: black;  /* 금색 배경에 잘 보이는 텍스트 색상 */
+}
+
+/* 2등 - 은색 */
+.silver {
+    background-color: silver;
+    color: black;  /* 은색 배경에 잘 보이는 텍스트 색상 */
+}
+
+/* 3등 - 동색 */
+.bronze {
+    background-color: #cd7f32;  /* 동색 */
+    color: black;  /* 동색 배경에 잘 보이는 텍스트 색상 */
+}
+
+/* 전체 박스에 border-box 적용 */
+*, *:before, *:after {
+    box-sizing: border-box;
+}
+
+.content ul li {
+    width: 100%;
+    padding: 10px;
+    margin: 0;
+    overflow: hidden;
+    display: flex;             /* Flexbox 레이아웃 */
+    justify-content: space-between; /* 팀 이름과 스티커 수를 양쪽에 배치 */
+    align-items: center;        /* 세로 가운데 정렬 */
+}
+
+/* 추가적으로 텍스트 정렬 문제 해결 */
+.name, .count {
+    display: inline-block;
+    vertical-align: middle;
+}
+
+/* 기본적인 스타일 유지 */
+
+/* 전체 컨테이너 레이아웃을 Flexbox로 설정 */
+.container {
+    display: flex;
+    justify-content: space-between;
+    margin: 20px;
+}
+
+/* 리더보드 컨테이너 설정 */
+.leaderboard {
+    flex: 1;
+    margin-right: 20px; /* 리더보드와 컨트롤 사이에 간격 추가 */
+}
+
+/* 컨트롤 패널 설정 */
+.controls {
+    flex: 0 0 300px;
+    background-color: #333;
+    padding: 20px;
+    border-radius: 10px;
+    text-align: center;
+}
+
+.controls label, .controls select, .controls input, .controls button {
+    margin: 10px;
+    font-size: 16px;
+}
+
+.button-group {
+    display: flex;
+    justify-content: space-around;
+    margin-bottom: 20px;
+}
+
+.controls button {
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    padding: 10px;
+    cursor: pointer;
+}
+
+.controls button:hover {
+    background-color: #45a049;
+}
+
+#sticker-count {
+    width: 80px;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+#update-stickers {
+    background-color: #2196F3;
+    padding: 10px 20px;
+}
+
+#update-stickers:hover {
+    background-color: #1E88E5;
+}
+
+/* CSS - Shea Parker */
+
+/********* BASE **********/
+*, *:before, *:after {
+    box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+}
+
+/* 기존 스타일 유지 */
+
+body, html {
+    min-height: 100%;
+}
+
+body {
+    background: #444;
+}
+
+.leaderboard {
+    position: relative;
+    width: 70%;
+    height: 70%;
+    max-width: 960px;
+    min-width: 400px;
+    min-height: 600px;
+    margin: 30px auto 0 auto;
+    padding: 3%;
+}
+
+.leaderboard h1 {
+    text-align: center;
+    text-transform: uppercase;
+    margin: 30px;
+    padding: 0;
+    color: #cc7713;
+}
+
+.content {
+    position: relative;
+    width: 70%;
+    margin: 3px auto 0 auto;
+    min-width: 300px;
+}
+
+/* .content ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    border: 5px solid #CCC;
+    background: rgba(40,40,40,0.75);
+} */
+
+.content ul li {
+    position: relative;
+    color: #FFF;
+    font-family: helvetica;
+    padding: 2% 5%;
+    border-bottom: 1px solid #555;
+}
+
+.content ul li:last-child {
+    border-bottom: none;
+}
+
+.name {
+    font-weight: bold;
+}
+
+.count {
+    display: inline-block;
+    float: right;
+    color: rgb(43, 184, 0);
+    font-weight: bold;
+}
+
+.count:after {
+    content: '개';
+    color: #CCC;
+    font-size: 80%;
+    font-weight: normal;
+}
+
+/********* BLING **********/
+.content ul {
+    border-radius: 20px;
+}
+
+.animate {
+    -moz-animation: flashIt 0.2s ease 1;
+    -webkit-animation: flashIt 0.2s ease 1;
+    animation: flashIt 0.2s ease 1;
+}
+
+.animate .countold {
+    -moz-animation: spinIt 0.3s ease 1;
+    -webkit-animation: spinIt 0.3s ease 1;
+    animation: spinIt 0.3s ease 1;
+}
+
+@-moz-keyframes flashIt {
+    100% { opacity: 0; background-color: #FFF;}
+}
+@-webkit-keyframes flashIt {
+    100% { opacity: 0; background-color: #FFF;}
+}
+@keyframes flashIt {
+    100% { opacity: 0; }
+}
+
+@-moz-keyframes spinIt {
+    20% {-moz-transform: rotate(-10deg)}
+    40% {-moz-transform: rotate(10deg)}
+    60% {-moz-transform: rotate(-10deg)}
+    80% {-moz-transform: rotate(10deg)}
+    100% {-moz-transform: rotate(-10deg)}
+}
+@-webkit-keyframes spinIt {
+    20% {-webkit-transform: rotate(-10deg)}
+    40% {-webkit-transform: rotate(10deg)}
+    60% {-webkit-transform: rotate(-10deg)}
+    80% {-webkit-transform: rotate(10deg)}
+    100% {-webkit-transform: rotate(-10deg)}
+}
+@keyframes spinIt {
+     20% {transform: rotate(-10deg)}
+     40% {transform: rotate(10deg)}
+     60% {transform: rotate(-10deg)}
+     80% {transform: rotate(10deg)}
+     100% {transform: rotate(-10deg)}
+}
+
+/* 1등 - 금색 */
+.gold {
+    background-color: gold;
+    color: black;  /* 금색 배경에 잘 보이는 텍스트 색상 */
+}
+
+/* 2등 - 은색 */
+.silver {
+    background-color: silver;
+    color: black;  /* 은색 배경에 잘 보이는 텍스트 색상 */
+}
+
+/* 3등 - 동색 */
+.bronze {
+    background-color: #cd7f32;  /* 동색 */
+    color: black;  /* 동색 배경에 잘 보이는 텍스트 색상 */
+}
+
+/* 전체 박스에 border-box 적용 */
+*, *:before, *:after {
+    box-sizing: border-box;
+}
+
+.content ul li {
+    width: 100%;
+    padding: 10px;
+    margin: 0;
+    overflow: hidden;
+    display: flex;             /* Flexbox 레이아웃 */
+    justify-content: space-between; /* 팀 이름과 스티커 수를 양쪽에 배치 */
+    align-items: center;        /* 세로 가운데 정렬 */
+}
+
+/* 추가적으로 텍스트 정렬 문제 해결 */
+.name, .count {
+    display: inline-block;
+    vertical-align: middle;
+}

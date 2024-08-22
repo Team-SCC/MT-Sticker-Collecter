@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>컴퓨터공학과 MT</title>
+    <link rel="stylesheet" href="/static/admin_style.css">
+</head>
+<body>
+    <div class="container">
+        <!-- Left side: Leaderboard -->
+        <div class="leaderboard">
+            <h1><span>실시간 컴퓨터공학과 MT 스티커 순위</span></h1>
+            <div class="content"></div>
+        </div>
+
+        <!-- Right side: Controls for Admin -->
+        <div class="controls">
+            <label for="team-select">팀 이름:</label>
+            <select id="team-select">
+                <!-- 팀 이름이 여기에 동적으로 추가됨 -->
+            </select>
+
+            <div class="button-group">
+                <button id="increase-1">+1</button>
+                <button id="increase-10">+10</button>
+                <button id="decrease-1">-1</button>
+                <button id="decrease-10">-10</button>
+            </div>
+
+            <input type="text" id="sticker-count" readonly>
+
+            <button id="update-stickers">업데이트</button>
+        </div>
+    </div>
+
+    <script src="/static/admin_script.js"></script>
+</body>
+</html>

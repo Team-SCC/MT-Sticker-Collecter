@@ -67,5 +67,10 @@ async def load_rank(db: Session = Depends(get_db)) -> list[Team]:
 
 
 @app.get("/leader_board")
-async def out_teams(db: Session = Depends(get_db)):
+async def leaderboard_page(db: Session = Depends(get_db)):
     return templates.TemplateResponse("leaderboard.html", {"request": {}})
+
+
+@app.get("/leader_board_admin")
+async def admin_page(db: Session = Depends(get_db)):
+    return templates.TemplateResponse("admin.html", {"request": {}})
