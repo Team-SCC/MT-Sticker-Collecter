@@ -7,4 +7,5 @@ fastapi
 sqlalchemy
 uvicorn
 psycopg2
+jinja2
 ```
