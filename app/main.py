@@ -3,18 +3,18 @@ from fastapi.templating import Jinja2Templates
 from fastapi.staticfiles import StaticFiles
 from sqlalchemy.orm import Session
 
-from .crud import insert_team, update_team_sticker, get_teams
-from .database import engine, get_db
-from .schemas import (
+from crud import insert_team, update_team_sticker, get_teams
+from database import engine, get_db
+from schemas import (
     TeamCreate,
     TeamCreateResponse,
     UpdateStickerResponse,
     BasicResponse,
     Team,
 )
-from .schemas import UpdateStickerRequest
-from .models import Base
-
+from schemas import UpdateStickerRequest
+from models import Base
+from setting import Admin
 
 app = FastAPI()
 
@@ -71,6 +71,13 @@ async def leaderboard_page(db: Session = Depends(get_db)):
     return templates.TemplateResponse("leaderboard.html", {"request": {}})
 
 
-@app.get("/leader_board_admin")
-async def admin_page(db: Session = Depends(get_db)):
-    return templates.TemplateResponse("admin.html", {"request": {}})
+@app.get("/leader_board_admin/{password}")
+async def admin_page(password: str, db: Session = Depends(get_db)):
+    if password == Admin().get_password():
+        return templates.TemplateResponse("admin.html", {"request": {}})
+    return templates.TemplateResponse("leaderboard.html", {"request": {}})
+
+if __name__ == "__main__":
+    import uvicorn
+
+    uvicorn.run(app=app, host="0.0.0.0", port=8000)

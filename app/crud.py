@@ -1,7 +1,7 @@
 from sqlalchemy.orm import Session
-from .models import Team
-from .schemas import TeamCreate, UpdateStickerResponse
-from .schemas import UpdateStickerRequest
+from models import Team
+from schemas import TeamCreate, UpdateStickerResponse
+from schemas import UpdateStickerRequest
 
 
 def insert_team(db: Session, team: TeamCreate) -> Team:
