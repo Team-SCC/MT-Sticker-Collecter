@@ -32,6 +32,7 @@ def update_team_sticker(
 
     return db_team
 
+
 def delete_team(db: Session, team_name: str) -> int:
     result = db.query(Team).filter(Team.name == team_name).delete()
     db.commit()

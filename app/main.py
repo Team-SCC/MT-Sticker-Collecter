@@ -15,7 +15,7 @@ from .schemas import (
 from .crud import insert_team, update_team_sticker, get_teams, delete_team
 from .schemas import UpdateStickerRequest
 from .models import Base
-from .setting import Admin
+from .settings import settings
 
 app = FastAPI()
 
@@ -44,6 +44,7 @@ async def create_team(
     if result is None:
         return TeamCreateResponse(detail="fail", name="생성 실패")
     return TeamCreateResponse(detail="success", name=result.name)
+
 
 @app.put("/update_sticker", response_model=UpdateStickerResponse)
 async def update_sticker(
@@ -74,12 +75,15 @@ async def leaderboard_page(db: Session = Depends(get_db)):
 
 @app.get("/leader_board_admin/{password}")
 async def admin_page(password: str, db: Session = Depends(get_db)):
-    if password == Admin().get_password():
+    if password == settings.ADMINPAGE_PASSWORD:
         return templates.TemplateResponse("admin.html", {"request": {}})
     return templates.TemplateResponse("leaderboard.html", {"request": {}})
 
+
 @app.delete("/delete_team/{team_name}", response_model=TeamDeleteResponse)
-async def delete_api(team_name: str, db: Session = Depends(get_db)) -> TeamDeleteResponse:
+async def delete_api(
+    team_name: str, db: Session = Depends(get_db)
+) -> TeamDeleteResponse:
     result = delete_team(db, team_name)
 
     if result:
@@ -87,14 +91,10 @@ async def delete_api(team_name: str, db: Session = Depends(get_db)) -> TeamDelet
     else:
         return TeamDeleteResponse(detail="fail", team_name=team_name)
 
+
 if __name__ == "__main__":
     import subprocess
 
-    command = [
-        "gunicorn",
-        "--reload",
-        "--workers", "4",
-        "app.main:app"
-    ]
+    command = ["gunicorn", "--reload", "--workers", "4", "app.main:app"]
 
     subprocess.run(command)

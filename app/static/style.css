@@ -69,14 +69,13 @@ body {
 
 .count {
     display: inline-block;
-    float: right;
     color: rgb(43, 184, 0);
     font-weight: bold;
 }
 
 .count:after {
     content: '개';
-    color: #CCC;
+    color: black;
     font-size: 80%;
     font-weight: normal;
 }
@@ -130,24 +129,6 @@ body {
      100% {transform: rotate(-10deg)}
 }
 
-/* 1등 - 금색 */
-.gold {
-    background-color: gold;
-    color: black;  /* 금색 배경에 잘 보이는 텍스트 색상 */
-}
-
-/* 2등 - 은색 */
-.silver {
-    background-color: silver;
-    color: black;  /* 은색 배경에 잘 보이는 텍스트 색상 */
-}
-
-/* 3등 - 동색 */
-.bronze {
-    background-color: #cd7f32;  /* 동색 */
-    color: black;  /* 동색 배경에 잘 보이는 텍스트 색상 */
-}
-
 /* 전체 박스에 border-box 적용 */
 *, *:before, *:after {
     box-sizing: border-box;
@@ -167,4 +148,22 @@ body {
 .name, .count {
     display: inline-block;
     vertical-align: middle;
+}
+
+/* 1등 - 금색 */
+.gold {
+    background-color: gold;
+    color: black;  /* 금색 배경에 잘 보이는 텍스트 색상 */
+}
+
+/* 2등 - 은색 */
+.silver {
+    background-color: silver;
+    color: black;  /* 은색 배경에 잘 보이는 텍스트 색상 */
+}
+
+/* 3등 - 동색 */
+.bronze {
+    background-color: #cd7f32;  /* 동색 */
+    color: black;  /* 동색 배경에 잘 보이는 텍스트 색상 */
 }

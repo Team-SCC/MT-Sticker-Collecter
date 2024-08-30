@@ -57,17 +57,17 @@ document.addEventListener("DOMContentLoaded", function () {
         let currentValue = parseInt(stickerCountInput.value) || 0;
         stickerCountInput.value = currentValue + 1;
     });
-    
+
     document.getElementById("increase-10").addEventListener("click", function () {
         let currentValue = parseInt(stickerCountInput.value) || 0;
         stickerCountInput.value = currentValue + 10;
     });
-    
+
     document.getElementById("decrease-1").addEventListener("click", function () {
         let currentValue = parseInt(stickerCountInput.value) || 0;
         stickerCountInput.value = currentValue - 1;
     });
-    
+
     document.getElementById("decrease-10").addEventListener("click", function () {
         let currentValue = parseInt(stickerCountInput.value) || 0;
         stickerCountInput.value = currentValue - 10;
