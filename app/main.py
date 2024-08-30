@@ -39,7 +39,7 @@ async def create_team(
     team_name: str, db: Session = Depends(get_db)
 ) -> TeamCreateResponse:
     new_team = TeamCreate(name=team_name)
-    result = insert_team(db=db, team=new_team)
+    result = await insert_team(db=db, team=new_team)
 
     if result is None:
         return TeamCreateResponse(detail="fail", name="생성 실패")
@@ -50,7 +50,7 @@ async def create_team(
 async def update_sticker(
     update_team: UpdateStickerRequest, db: Session = Depends(get_db)
 ) -> UpdateStickerResponse:
-    result = update_team_sticker(db, update_team)
+    result = await update_team_sticker(db, update_team)
 
     response = UpdateStickerResponse(
         detail="success", name=result.name, sticker=result.stickers
@@ -61,7 +61,7 @@ async def update_sticker(
 
 @app.get("/load_teams_rank")
 async def load_rank(db: Session = Depends(get_db)) -> list[Team]:
-    result = get_teams(db)
+    result = await get_teams(db)
 
     sorted_result = sorted(result, key=lambda team: team.stickers, reverse=True)
 
@@ -84,7 +84,7 @@ async def admin_page(password: str, db: Session = Depends(get_db)):
 async def delete_api(
     team_name: str, db: Session = Depends(get_db)
 ) -> TeamDeleteResponse:
-    result = delete_team(db, team_name)
+    result = await delete_team(db, team_name)
 
     if result:
         return TeamDeleteResponse(detail="success", team_name=team_name)
