@@ -7,6 +7,10 @@
     -webkit-box-sizing: border-box;
 }
 
+h2 {
+    color: white;
+}
+
 /* 기존 스타일 유지 */
 
 body, html {
@@ -69,7 +73,6 @@ body {
 
 .count {
     display: inline-block;
-    float: right;
     color: rgb(43, 184, 0);
     font-weight: bold;
 }
@@ -303,7 +306,6 @@ body {
 
 .count {
     display: inline-block;
-    float: right;
     color: rgb(43, 184, 0);
     font-weight: bold;
 }
@@ -402,3 +404,4 @@ body {
     display: inline-block;
     vertical-align: middle;
 }
+

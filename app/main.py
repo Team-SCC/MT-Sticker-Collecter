@@ -3,18 +3,19 @@ from fastapi.templating import Jinja2Templates
 from fastapi.staticfiles import StaticFiles
 from sqlalchemy.orm import Session
 
-from crud import insert_team, update_team_sticker, get_teams
-from database import engine, get_db
-from schemas import (
+from app.database import engine, get_db
+from .schemas import (
     TeamCreate,
     TeamCreateResponse,
     UpdateStickerResponse,
     BasicResponse,
     Team,
+    TeamDeleteResponse,
 )
-from schemas import UpdateStickerRequest
-from models import Base
-from setting import Admin
+from .crud import insert_team, update_team_sticker, get_teams, delete_team
+from .schemas import UpdateStickerRequest
+from .models import Base
+from .setting import Admin
 
 app = FastAPI()
 
@@ -33,18 +34,18 @@ async def default_page() -> BasicResponse:
     return BasicResponse(detail="success")
 
 
-@app.post("/create_team", response_model=TeamCreateResponse)
+@app.post("/create_team/{team_name}", response_model=TeamCreateResponse)
 async def create_team(
-    team: TeamCreate, db: Session = Depends(get_db)
+    team_name: str, db: Session = Depends(get_db)
 ) -> TeamCreateResponse:
-    result = insert_team(db=db, team=team)
+    new_team = TeamCreate(name=team_name)
+    result = insert_team(db=db, team=new_team)
 
-    response = TeamCreateResponse(detail="success", name=result.name)
+    if result is None:
+        return TeamCreateResponse(detail="fail", name="생성 실패")
+    return TeamCreateResponse(detail="success", name=result.name)
 
-    return response
-
-
-@app.post("/update_sticker", response_model=UpdateStickerResponse)
+@app.put("/update_sticker", response_model=UpdateStickerResponse)
 async def update_sticker(
     update_team: UpdateStickerRequest, db: Session = Depends(get_db)
 ) -> UpdateStickerResponse:
@@ -77,7 +78,23 @@ async def admin_page(password: str, db: Session = Depends(get_db)):
         return templates.TemplateResponse("admin.html", {"request": {}})
     return templates.TemplateResponse("leaderboard.html", {"request": {}})
 
-if __name__ == "__main__":
-    import uvicorn
+@app.delete("/delete_team/{team_name}", response_model=TeamDeleteResponse)
+async def delete_api(team_name: str, db: Session = Depends(get_db)) -> TeamDeleteResponse:
+    result = delete_team(db, team_name)
 
-    uvicorn.run(app=app, host="0.0.0.0", port=8000)
+    if result:
+        return TeamDeleteResponse(detail="success", team_name=team_name)
+    else:
+        return TeamDeleteResponse(detail="fail", team_name=team_name)
+
+if __name__ == "__main__":
+    import subprocess
+
+    command = [
+        "gunicorn",
+        "--reload",
+        "--workers", "4",
+        "app.main:app"
+    ]
+
+    subprocess.run(command)

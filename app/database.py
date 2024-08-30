@@ -1,7 +1,7 @@
 from sqlalchemy import create_engine
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import sessionmaker
-from setting import DBAuth
+from .setting import DBAuth
 
 # PostgreSQL 연결 URL 설정 (환경 변수로 설정)
 

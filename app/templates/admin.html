@@ -16,14 +16,15 @@
 
         <!-- Right side: Controls for Admin -->
         <div class="controls">
+            <h2 id="title_me">--------스티커 수정--------</h2>
             <label for="team-select">팀 이름:</label>
             <select id="team-select">
                 <!-- 팀 이름이 여기에 동적으로 추가됨 -->
             </select>
 
             <div class="button-group">
-                <button id="increase-1">+1</button>
                 <button id="increase-10">+10</button>
+                <button id="increase-1">+1</button>
                 <button id="decrease-1">-1</button>
                 <button id="decrease-10">-10</button>
             </div>
@@ -31,6 +32,18 @@
             <input type="text" id="sticker-count" readonly>
 
             <button id="update-stickers">업데이트</button>
+            
+            <h2 id="title_me">----------팀 생성----------</h2>
+            <label for="new-team-name">새 팀 이름</label>
+            <input type="text" id="new-team-name" placeholder="생성할 팀 이름 입력">
+            <button id="create-team">팀 생성</button>
+            <br>
+            <h2 id="title_me">----------팀 삭제----------</h2>
+            <label for="team-select">팀 선택:</label>
+            <select id="team-select-delete">
+                
+            </select>
+            <button id="delete-team">팀 삭제</button>
         </div>
     </div>
 

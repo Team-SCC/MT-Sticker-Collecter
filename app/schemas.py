@@ -36,3 +36,6 @@ class UpdateStickerResponse(BasicResponse):
 
 class UpdateStickerRequest(TeamBase):
     stickers: int
+
+class TeamDeleteResponse(BasicResponse):
+    team_name: str
