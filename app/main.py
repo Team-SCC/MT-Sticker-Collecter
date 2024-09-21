@@ -37,61 +37,33 @@ async def default_page() -> BasicResponse:
 async def create_team(
     team_name: str, db: Session = Depends(get_db)
 ) -> TeamCreateResponse:
-    new_team = TeamCreate(name=team_name)
-    result = await insert_team(db=db, team=new_team)
-
-    if result is None:
-        return TeamCreateResponse(detail="fail", name="생성 실패")
-    return TeamCreateResponse(detail="success", name=result.name)
+    pass
 
 
 @app.put("/update_sticker", response_model=UpdateStickerResponse)
 async def update_sticker(
     update_team: UpdateStickerRequest, db: Session = Depends(get_db)
 ) -> UpdateStickerResponse:
-    result = await update_team_sticker(db, update_team)
-
-    response = UpdateStickerResponse(
-        detail="success", name=result.name, sticker=result.stickers
-    )
-
-    return response
+    pass
 
 
 @app.get("/load_teams_rank")
 async def load_rank(db: Session = Depends(get_db)) -> list[Team]:
-    result = await get_teams(db)
-
-    sorted_result = sorted(result, key=lambda team: team.stickers, reverse=True)
-
-    return sorted_result
+    pass
 
 
 @app.get("/leader_board")
 async def leaderboard_page(db: Session = Depends(get_db)):
-    return templates.TemplateResponse("leaderboard.html", {"request": {}})
+    pass
 
 
 @app.get("/leader_board_admin")
 async def admin_page(db: Session = Depends(get_db)):
-    return templates.TemplateResponse("admin.html", {"request": {}})
+    pass
 
 
 @app.delete("/delete_team/{team_name}", response_model=TeamDeleteResponse)
 async def delete_api(
     team_name: str, db: Session = Depends(get_db)
 ) -> TeamDeleteResponse:
-    result = await delete_team(db, team_name)
-
-    if result:
-        return TeamDeleteResponse(detail="success", team_name=team_name)
-    else:
-        return TeamDeleteResponse(detail="fail", team_name=team_name)
-
-
-if __name__ == "__main__":
-    import subprocess
-
-    command = ["gunicorn", "--reload", "--workers", "4", "app.main:app"]
-
-    subprocess.run(command)
+    pass
