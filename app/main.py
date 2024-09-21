@@ -37,8 +37,8 @@ async def default_page() -> BasicResponse:
 async def create_team(
     team_name: str, db: Session = Depends(get_db)
 ) -> TeamCreateResponse:
-    new_team = TeamCreate(name=team_name)
-    result = await insert_team(db=db, team=new_team)
+    new_team = TeamCreate(name=team_name)               # 팀 생성
+    result = await insert_team(db=db, team=new_team)    # 해당 팀 데이터베이스에 추가
 
     if result is None:
         return TeamCreateResponse(detail="fail", name="생성 실패")
@@ -49,9 +49,9 @@ async def create_team(
 async def update_sticker(
     update_team: UpdateStickerRequest, db: Session = Depends(get_db)
 ) -> UpdateStickerResponse:
-    result = await update_team_sticker(db, update_team)
+    result = await update_team_sticker(db, update_team) # 팀 스티커 업데이트
 
-    response = UpdateStickerResponse(
+    response = UpdateStickerResponse(   # 업데이트 정보 반환
         detail="success", name=result.name, sticker=result.stickers
     )
 
@@ -60,8 +60,9 @@ async def update_sticker(
 
 @app.get("/load_teams_rank")
 async def load_rank(db: Session = Depends(get_db)) -> list[Team]:
-    result = await get_teams(db)
+    result = await get_teams(db)        # 팀 목록 전체 조회
 
+    # 스티커 많은 순으로 정렬
     sorted_result = sorted(result, key=lambda team: team.stickers, reverse=True)
 
     return sorted_result
@@ -87,11 +88,3 @@ async def delete_api(
         return TeamDeleteResponse(detail="success", team_name=team_name)
     else:
         return TeamDeleteResponse(detail="fail", team_name=team_name)
-
-
-if __name__ == "__main__":
-    import subprocess
-
-    command = ["gunicorn", "--reload", "--workers", "4", "app.main:app"]
-
-    subprocess.run(command)
