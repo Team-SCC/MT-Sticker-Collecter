@@ -15,7 +15,6 @@ from .schemas import (
 from .crud import insert_team, update_team_sticker, get_teams, delete_team
 from .schemas import UpdateStickerRequest
 from .models import Base
-from .settings import settings
 
 app = FastAPI()
 
@@ -73,11 +72,9 @@ async def leaderboard_page(db: Session = Depends(get_db)):
     return templates.TemplateResponse("leaderboard.html", {"request": {}})
 
 
-@app.get("/leader_board_admin/{password}")
-async def admin_page(password: str, db: Session = Depends(get_db)):
-    if password == settings.ADMINPAGE_PASSWORD:
-        return templates.TemplateResponse("admin.html", {"request": {}})
-    return templates.TemplateResponse("leaderboard.html", {"request": {}})
+@app.get("/leader_board_admin")
+async def admin_page(db: Session = Depends(get_db)):
+    return templates.TemplateResponse("admin.html", {"request": {}})
 
 
 @app.delete("/delete_team/{team_name}", response_model=TeamDeleteResponse)
